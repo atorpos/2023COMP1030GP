@@ -1,6 +1,7 @@
 package org.trail_01;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
+import java.net.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,15 +9,32 @@ public class Main {
         Random random = new Random();
         int minNumber, maxNumber, numberOfPlayers, attempts, randomNumber, minAttempts = Integer.MAX_VALUE;
         String playerName, winnerName = "";
-
+//        ConnectToInternet cTi = new ConnectToInternet();
+//        cTi.numebreffect();
         System.out.println("Welcome to the Guess the Number Game!");
 
         // Input the range of the random number
-        System.out.print("Enter the minimum number: ");
-        minNumber = scanner.nextInt();
+        while (true) {
+            try {
+                System.out.print("Enter the minimum number: ");
+                minNumber = scanner.nextInt();
+                break;
+            } catch (Exception e) {
+                scanner.nextLine(); // Consume the invalid input
+                System.out.println("Invalid input. Please enter an integer.");
+            }
+        }
 
-        System.out.print("Enter the maximum number: ");
-        maxNumber = scanner.nextInt();
+        while (true) {
+            try {
+                System.out.print("Enter the maximum number: ");
+                maxNumber = scanner.nextInt();
+                break;
+            } catch (Exception e) {
+                scanner.nextLine(); // Consume the invalid input
+                System.out.println("Invalid input. Please enter an integer.");
+            }
+        }
 
         // Validate the range of the random number
         if (minNumber >= maxNumber) {
@@ -26,10 +44,26 @@ public class Main {
         }
 
         // Input the number of players
-        System.out.print("Enter the number of players (1 to 3): ");
-        numberOfPlayers = scanner.nextInt();
+        while (true) {
+            try {
+                System.out.print("Enter the number of players (1 to 3): ");
+                numberOfPlayers = scanner.nextInt();
+                break;
+            } catch (Exception e) {
+                scanner.nextLine(); // Consume the invalid input
+                System.out.println("Invalid input. Please enter an integer.");
+            }
+        }
 
         // Validate the number of players
+//        boolean numberinRange = true;
+//        while (numberinRange) {
+//            if (numberOfPlayers <= 0 || numberOfPlayers > 3) {
+//                numberinRange = true;
+//            } else {
+//                numberinRange = false;
+//            }
+//        }
         if (numberOfPlayers <= 0 || numberOfPlayers > 3) {
             System.out.println("Invalid number of players! Please enter a value between 1 and 3.");
             scanner.close();
@@ -49,7 +83,7 @@ public class Main {
 
             // Start the game for the current player
             System.out.println("Hi, " + playerName + "! I have picked a number between " + minNumber + " and " + maxNumber + ". Can you guess it?");
-
+            System.out.println(randomNumber);
             // Guessing loop for the current player
             while (true) {
                 System.out.print("Enter your guess: ");
