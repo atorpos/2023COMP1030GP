@@ -5,11 +5,58 @@ import java.util.*;
 public class GameValues {
     private int minNumber, maxNumber, numberOfPlayers, attempts, randomNumber, minAttempts = Integer.MAX_VALUE;
     private String playerName, winnerName;
+
+    private String[] playersname;
+    private int[] playertrial;
+
+    public void SetArraySize(int initSize) {
+        playersname = new String[initSize];
+        playertrial = new int[initSize];
+//        arraysize = 0;
+    }
+    public void listarray() {
+        System.out.printf("___________________________\n");
+        for (int i =0; i < playersname.length; i++) {
+            System.out.printf("| %10s | %10s |\n", this.playersname[i], this.playertrial[i]);
+        }
+        System.out.printf("___________________________\n");
+    }
+
+    public void gameResultCheck(){
+        int firstvalue = playertrial[0];
+        int matchedvalue = 0;
+        int winnerlocation = 0;
+        boolean isMatch = false;
+        StringBuilder matchplayers = new StringBuilder(new String(""));
+
+        for (int i = 1; i < playertrial.length; i++) {
+            if(playertrial[i] < firstvalue) {
+                firstvalue = playertrial[i];
+                winnerlocation = i;
+            }
+        }
+        matchplayers.append(playersname[winnerlocation]);
+        for (int j = 0; j< playertrial.length; j++) {
+            System.out.println("player" + playertrial[j] + "first trial" + firstvalue);
+            if (playertrial[j] == firstvalue && j != winnerlocation){
+                    matchplayers.append(", ").append(playersname[j]);
+                    isMatch = true;
+            }
+        }
+        if (isMatch) {
+            System.out.printf("We have tie! Winners are %s ", matchplayers);
+        } else {
+            System.out.printf("Congratulations %s! You are the winner with the lowest number of attempts: %s attempts.", this.playersname[winnerlocation], this.playertrial[winnerlocation]);
+        }
+
+    }
+
     InputChecker inputChecker = new InputChecker();
 
     public int getMinNumber() {
         return minNumber;
     }
+
     public int getMaxNumber(){
         return maxNumber;
     }
@@ -75,18 +122,22 @@ public class GameValues {
     }
 
     public void randomloop() {
+        SetArraySize(this.numberOfPlayers);
         for (int i = 1; i <= this.numberOfPlayers; i ++) {
             this.attempts = 0;
             boolean keepdoing = true;
             setRandomNumber();
             setPlayerName(i);
+            this.playersname[i-1] = this.playerName;
             System.out.println("Hi, " + this.playerName + "! I have picked a number between " + this.minNumber + " and " + this.maxNumber + ". Can you guess it?");
             do {
                 int guess = inputChecker.inputInt("Enter your guess: ");
                 this.attempts++;
                 keepdoing = answerchecker(guess);
             } while (keepdoing);
+            this.playertrial[i-1] = this.attempts;
         }
+
     }
 
     public boolean answerchecker(int guessnumber) {

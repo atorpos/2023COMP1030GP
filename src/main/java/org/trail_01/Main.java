@@ -28,9 +28,8 @@ public class Main {
         gamevalues.randomloop();
 
         // Display the winner
-        if (!gamevalues.getWinnerName().isEmpty()) {
-            System.out.println("Congratulations, " + gamevalues.getWinnerName() + "! You are the winner with the lowest number of attempts: " + gamevalues.getMinAttempts() + " attempts.");
-        }
+        gamevalues.listarray();
+        gamevalues.gameResultCheck();
 
         scanner.close();
     }
