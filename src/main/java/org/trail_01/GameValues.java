@@ -15,19 +15,18 @@ public class GameValues {
 //        arraysize = 0;
     }
     public void listarray() {
-        System.out.printf("___________________________\n");
+        System.out.println("___________________________");
         for (int i =0; i < playersname.length; i++) {
             System.out.printf("| %10s | %10s |\n", this.playersname[i], this.playertrial[i]);
         }
-        System.out.printf("___________________________\n");
+        System.out.println("___________________________");
     }
 
     public void gameResultCheck(){
         int firstvalue = playertrial[0];
-        int matchedvalue = 0;
         int winnerlocation = 0;
         boolean isMatch = false;
-        StringBuilder matchplayers = new StringBuilder(new String(""));
+        StringBuilder matchplayers = new StringBuilder();
 
         for (int i = 1; i < playertrial.length; i++) {
             if(playertrial[i] < firstvalue) {
@@ -62,14 +61,6 @@ public class GameValues {
 
     public int getRandomNumber() {
         return randomNumber;
-    }
-
-    public int getMinAttempts() {
-        return minAttempts;
-    }
-
-    public String getWinnerName() {
-        return winnerName;
     }
 
     public void setMinNumber(int minNumber) {
@@ -124,7 +115,7 @@ public class GameValues {
         SetArraySize(this.numberOfPlayers);
         for (int i = 1; i <= this.numberOfPlayers; i ++) {
             this.attempts = 0;
-            boolean keepdoing = true;
+            boolean keepdoing;
             setRandomNumber();
             setPlayerName(i);
             this.playersname[i-1] = this.playerName;
