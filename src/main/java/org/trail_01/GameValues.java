@@ -37,7 +37,6 @@ public class GameValues {
         }
         matchplayers.append(playersname[winnerlocation]);
         for (int j = 0; j< playertrial.length; j++) {
-            System.out.println("player" + playertrial[j] + "first trial" + firstvalue);
             if (playertrial[j] == firstvalue && j != winnerlocation){
                     matchplayers.append(", ").append(playersname[j]);
                     isMatch = true;
